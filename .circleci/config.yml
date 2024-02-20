@@ -3,14 +3,14 @@ jobs:
   build:
     docker:
       - image: maven:3.8.4-openjdk-17
-        commands:
-          - sudo apt-get update && sudo apt-get install docker-ce 
 
     steps:
       - checkout
       - run:
           name: Build Spring Boot application
-          command: mvn package -DskipTests
+          command: |
+            sudo apt-get update && sudo apt-get install docker-ce
+            mvn package -DskipTests
 
       - run:
           name: Build Docker image
