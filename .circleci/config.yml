@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  docker: circleci/docker@7
 jobs:
   build:
     docker:
@@ -8,9 +10,7 @@ jobs:
       - checkout
       - run:
           name: Build Spring Boot application
-          command: |
-            apt-get update && sudo apt-get install docker-ce
-            mvn package -DskipTests
+          command: mvn package -DskipTests
 
       - run:
           name: Build Docker image
