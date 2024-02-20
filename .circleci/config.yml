@@ -4,21 +4,19 @@ jobs:
     docker:
       - image: maven:3.8.4-openjdk-17
         commands:
-            - sudo apt-get update && sudo apt-get install docker-ce
+          - sudo apt-get update && sudo apt-get install docker-ce 
 
     steps:
       - checkout
-      # Build Spring Boot application
       - run:
           name: Build Spring Boot application
           command: mvn package -DskipTests
 
-      # Build Docker image
       - run:
           name: Build Docker image
           command: |
             docker build -t tnm-training .
-            docker login -u dwijptltnm -p Technman@I2024!!
+            docker login -u dwijptltnm -p Technman@I2024!!  # Adjust credentials if needed
             docker tag tnm-training dwijptltnm/tnm-training
             docker push dwijptltnm/tnm-training
 
