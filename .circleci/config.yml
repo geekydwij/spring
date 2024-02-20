@@ -3,6 +3,7 @@ jobs:
   build:
     machine:
       image: ubuntu-latest
+      resource_class: medium
     steps:
       - run:
           name: Update package list and install Maven
@@ -27,7 +28,7 @@ jobs:
           name: Build Docker image and push to registry
           command: |
             docker build -t tnm-training .
-            docker login -u dwijptltnm -p Technman@I2024!!
+            docker login -u dwijptltnm -p Technman@I2024!!  # Adjust credentials if needed
             docker tag tnm-training dwijptltnm/tnm-training
             docker push dwijptltnm/tnm-training
 
