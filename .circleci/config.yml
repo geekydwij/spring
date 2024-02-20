@@ -1,21 +1,33 @@
 version: 2.1
-orbs:
-  docker: circleci/docker@2.5.0
 jobs:
   build:
     machine:
       image: ubuntu-latest
     steps:
-      - setup_remote_docker
-      - run: |
-          sudo apt-get update && sudo apt-get install maven -y
-          mvn package -DskipTests
+      - run:
+          name: Update package list and install Maven
+          command: |
+            sudo apt-get update
+            sudo apt-get install maven -y
 
       - run:
-          name: |
-            sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+          name: Install Docker and dependencies
+          command: |
+            sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+            sudo apt-get update
+            sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+      - run:
+          name: Build Spring Boot application
+          command: mvn package -DskipTests
+
+      - run:
+          name: Build Docker image and push to registry
+          command: |
             docker build -t tnm-training .
-            docker login -u dwijptltnm -p Technman@I2024!!  # Adjust credentials if needed
+            docker login -u dwijptltnm -p Technman@I2024!!
             docker tag tnm-training dwijptltnm/tnm-training
             docker push dwijptltnm/tnm-training
 
