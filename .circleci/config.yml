@@ -7,11 +7,6 @@ jobs:
     steps:
       - checkout
 
-      # Install Maven
-      - run:
-          name: Install Maven
-          command: sudo apt-get install maven -y
-
       # Build Spring Boot application
       - run:
           name: Build Spring Boot application
