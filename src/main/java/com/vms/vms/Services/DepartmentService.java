@@ -35,7 +35,7 @@ public class DepartmentService {
     public APIResponse<List<Department>> getAllDepartments() {
         try {
             List<Department> departments = departmentRepository.findAll();
-            return new APIResponse<>(departments, HttpStatus.OK, "All departments retrieved successfully");
+            return new APIResponse<>(departments, HttpStatus.OK, "All departments retrieved successfully!!");
         } catch (Exception e) {
             return new APIResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), "Failed to retrieve departments");
         }
