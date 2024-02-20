@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Install Docker
           command: |
-            sudo apt-get update && sudo apt-get install -y docker.io
+            apk update && apk add docker
       - run:
           name: Build Spring Boot application
           command: mvn package -DskipTests
