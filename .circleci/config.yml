@@ -8,11 +8,9 @@ jobs:
 
     steps:
       - checkout
-      # Add setup step to install Docker
-      - run:
-          name: Install Docker
-          command: |
-            apk update && apk add docker
+      # Run Docker-in-Docker setup
+      - setup_remote_docker
+
       - run:
           name: Build Spring Boot application
           command: mvn package -DskipTests
