@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Build Spring Boot application
           command: |
-            sudo apt-get update && sudo apt-get install docker-ce
+            apt-get update && sudo apt-get install docker-ce
             mvn package -DskipTests
 
       - run:
