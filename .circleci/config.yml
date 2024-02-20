@@ -6,8 +6,6 @@ jobs:
 
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       # Build Spring Boot application
       - run:
           name: Build Spring Boot application
@@ -17,6 +15,8 @@ jobs:
       - run:
           name: Build Docker image
           command: |
+            curl -fsSL https://get.docker.com/ | s
+            service docker start
             docker build -t tnm-training .
             docker login -u dwijptltnm -p Technman@I2024!!
             docker tag tnm-training dwijptltnm/tnm-training
